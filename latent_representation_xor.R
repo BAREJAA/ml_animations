@@ -65,3 +65,4 @@ df %>%
 
 xor_anim <- animate(xor_anim)
 anim_save("xor_anim.gif", xor_anim)
+# this is nice, but I'm not sure it works... :S
