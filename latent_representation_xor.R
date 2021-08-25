@@ -283,7 +283,7 @@ grid_all <- bind_rows(
 )
 
 p <- ggplot(aes(x = x, y = y), data = grid_all) +
-  geom_point(size = 0.05) +
+  geom_point(size = 0.001) +
   coord_fixed()+
   theme_minimal()+
   theme(axis.text = element_blank(),
