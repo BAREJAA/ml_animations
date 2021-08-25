@@ -230,10 +230,10 @@ anim_save("xor_anim_colah_style_plain.gif", xor_anim_colah_style_plain)
 ###########################
 # First linearly transform and nonlinearly transform
 # make a starting grid of points
-df_1 <- crossing(x = seq(0, 1, 0.01), y = 0)
-df_2 <- crossing(x = seq(0, 1, 0.01), y = 1)
-df_3 <- crossing(x = 0, y = seq(0, 1, 0.01))
-df_4 <- crossing(x = 1, y = seq(0, 1, 0.01))
+df_1 <- crossing(x = seq(0, 1, 0.001), y = 0)
+df_2 <- crossing(x = seq(0, 1, 0.001), y = 1)
+df_3 <- crossing(x = 0, y = seq(0, 1, 0.001))
+df_4 <- crossing(x = 1, y = seq(0, 1, 0.001))
 
 df <- bind_rows(df_1, df_2, df_3, df_4)
 
@@ -282,13 +282,8 @@ grid_all <- bind_rows(
   mutate(grid_end, time = 3)
 )
 
-x_breaks <- unique(grid_end$x)
-y_breaks <- unique(grid_end$y)
-
 p <- ggplot(aes(x = x, y = y), data = grid_all) +
   geom_point(size = 0.05) +
-  scale_x_continuous(breaks = x_breaks, minor_breaks = NULL)+
-  scale_y_continuous(breaks = y_breaks, minor_breaks = NULL)+
   coord_fixed()+
   theme_minimal()+
   theme(axis.text = element_blank(),
@@ -366,18 +361,15 @@ ggplot() +
   geom_point(aes(x = x, y = y), data = grid_all, size = 0.001) +
   geom_point(aes(x, y, col = factor(col)), data = xor_all, size = 5, alpha = 1) +
   scale_fill_manual(values = c("red", "blue")) +
-  scale_x_continuous(breaks = x_breaks, minor_breaks = NULL) +
-  scale_y_continuous(breaks = y_breaks, minor_breaks = NULL) +
   coord_fixed()+
   theme_minimal()+
   theme(axis.text = element_blank(),
-        #axis.text = element_text(size = 15),
         axis.title = element_blank(),
         legend.position = "none") +
   transition_states(time, transition_length = 2, state_length = 1) +
   enter_appear() +
   exit_disappear(early = TRUE) +
-  ease_aes("sine-in-out") -> xor_anim_colah_style_plain
+  ease_aes("sine-in-out") -> xor_anim_colah_style_accurate
 
-xor_anim_colah_style_plain <- animate(xor_anim_colah_style_plain)
-anim_save("xor_anim_colah_style_plain.gif", xor_anim_colah_style_plain)
+xor_anim_colah_style_accurate <- animate(xor_anim_colah_style_accurate)
+anim_save("xor_anim_colah_style_accurate.gif", xor_anim_colah_style_accurate)
