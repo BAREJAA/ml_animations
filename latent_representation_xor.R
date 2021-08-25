@@ -173,13 +173,56 @@ p <- ggplot() +
   geom_point(aes(x = x, y = y), data = grid_all, size = 0.001) +
   geom_point(aes(x, y, col = factor(col)), data = xor_all, size = 5, alpha = 1) +
   scale_fill_manual(values = c("red", "blue")) +
-  scale_x_continuous(breaks = x_breaks, minor_breaks = NULL) +
-  scale_y_continuous(breaks = y_breaks, minor_breaks = NULL) +
+  #scale_x_continuous(breaks = x_breaks, minor_breaks = NULL) +
+  #scale_y_continuous(breaks = y_breaks, minor_breaks = NULL) +
   coord_fixed()+
   theme_minimal()+
-  theme(axis.text = element_blank(),
+  theme(#axis.text = element_blank(),
+        axis.text = element_text(size = 15),
         axis.title = element_blank(),
         legend.position = "none")
 p
 
 p + gganimate::transition_states(time, wrap = FALSE)
+
+# save animated plots
+# animated plot
+ggplot() +
+  geom_point(aes(x = x, y = y), data = grid_all, size = 0.001) +
+  geom_point(aes(x, y, col = factor(col)), data = xor_all, size = 5, alpha = 1) +
+  scale_fill_manual(values = c("red", "blue")) +
+  #scale_x_continuous(breaks = x_breaks, minor_breaks = NULL) +
+  #scale_y_continuous(breaks = y_breaks, minor_breaks = NULL) +
+  coord_fixed()+
+  theme_minimal()+
+  theme(#axis.text = element_blank(),
+    axis.text = element_text(size = 15),
+    axis.title = element_blank(),
+    legend.position = "none") +
+  transition_states(time, transition_length = 2, state_length = 1) +
+  enter_appear() +
+  exit_disappear(early = TRUE) +
+  ease_aes("sine-in-out") -> xor_anim_colah_style
+
+xor_anim_colah_style <- animate(xor_anim_colah_style)
+anim_save("xor_anim_colah_style.gif", xor_anim_colah_style)
+
+ggplot() +
+  geom_point(aes(x = x, y = y), data = grid_all, size = 0.001) +
+  geom_point(aes(x, y, col = factor(col)), data = xor_all, size = 5, alpha = 1) +
+  scale_fill_manual(values = c("red", "blue")) +
+  scale_x_continuous(breaks = x_breaks, minor_breaks = NULL) +
+  scale_y_continuous(breaks = y_breaks, minor_breaks = NULL) +
+  coord_fixed()+
+  theme_minimal()+
+  theme(axis.text = element_blank(),
+    #axis.text = element_text(size = 15),
+    axis.title = element_blank(),
+    legend.position = "none") +
+  transition_states(time, transition_length = 2, state_length = 1) +
+  enter_appear() +
+  exit_disappear(early = TRUE) +
+  ease_aes("sine-in-out") -> xor_anim_colah_style_plain
+
+xor_anim_colah_style_plain <- animate(xor_anim_colah_style_plain)
+anim_save("xor_anim_colah_style_plain.gif", xor_anim_colah_style_plain)
