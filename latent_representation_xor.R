@@ -231,11 +231,18 @@ anim_save("xor_anim_colah_style_plain.gif", xor_anim_colah_style_plain)
 # First linearly transform and nonlinearly transform
 # make a starting grid of points
 df_1 <- crossing(x = seq(0, 1, 0.001), y = 0)
-df_2 <- crossing(x = seq(0, 1, 0.001), y = 1)
-df_3 <- crossing(x = 0, y = seq(0, 1, 0.001))
-df_4 <- crossing(x = 1, y = seq(0, 1, 0.001))
+df_2 <- crossing(x = seq(0, 1, 0.001), y = 0.25)
+df_3 <- crossing(x = seq(0, 1, 0.001), y = 0.5)
+df_4 <- crossing(x = seq(0, 1, 0.001), y = 0.75)
+df_5 <- crossing(x = seq(0, 1, 0.001), y = 1)
 
-df <- bind_rows(df_1, df_2, df_3, df_4)
+df_6 <- crossing(x = 0, y = seq(0, 1, 0.001))
+df_7 <- crossing(x = 0.25, y = seq(0, 1, 0.001))
+df_8 <- crossing(x = 0.5, y = seq(0, 1, 0.001))
+df_9 <- crossing(x = 0.75, y = seq(0, 1, 0.001))
+df_10 <- crossing(x = 1, y = seq(0, 1, 0.001))
+
+df <- bind_rows(df_1, df_2, df_3, df_4, df_5, df_6, df_7, df_8, df_9, df_10)
 
 # what does this look like?
 df %>% 
@@ -369,7 +376,7 @@ ggplot() +
   transition_states(time, transition_length = 2, state_length = 1) +
   enter_appear() +
   exit_disappear(early = TRUE) +
-  ease_aes("sine-in-out") -> xor_anim_colah_style_accurate
+  ease_aes("sine-in-out") -> xor_anim_colah_style_accurate_grid
 
-xor_anim_colah_style_accurate <- animate(xor_anim_colah_style_accurate)
-anim_save("xor_anim_colah_style_accurate.gif", xor_anim_colah_style_accurate)
+xor_anim_colah_style_accurate_grid <- animate(xor_anim_colah_style_accurate_grid)
+anim_save("xor_anim_colah_style_accurate_grid.gif", xor_anim_colah_style_accurate_grid)
